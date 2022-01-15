@@ -13,6 +13,8 @@ public class Climber extends SubsystemBase {
 
     private final Talon mArmTalon;
     private final Talon mHookTalon;
+    private double currentDisplacement = 0;
+    private double HookTalonSpeed; // change when you figure out speed per second when Talon.set(1)
 
 
 
@@ -27,11 +29,26 @@ public class Climber extends SubsystemBase {
 
   }
 
-  private void setHookDisplacement(double displacement) {
-      
-}
 
-// logic to be continues TODO
+  private void changeHookDisplacement(double increment) {
+    double percentOfTalonSpeed = increment / HookTalonSpeed;
+    
+    if(percentOfTalonSpeed < 0) {
+      mHookTalon.setExpiration(-percentOfTalonSpeed);
+      mHookTalon.set(-1);
+    } else {
+      mHookTalon.setExpiration(percentOfTalonSpeed);
+      mHookTalon.set(1);
+    }
+
+    currentDisplacement += increment;
+  }
+
+  private void setHookDisplacement(double displacement) {
+    changeHookDisplacement(currentDisplacement - displacement);
+  }
+
+
 
   @Override
   public void periodic() {
