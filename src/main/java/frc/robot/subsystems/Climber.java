@@ -11,11 +11,11 @@ public class Climber extends SubsystemBase {
 
     //feeding system
 
-    private final Talon mArmTalon;
-    private final Talon mHookTalon;
-    private double currentDisplacement = 0;
-    private double HookTalonSpeed; // change when you figure out speed per second when Talon.set(1)
-
+  private final Talon mArmTalon;
+  private final Talon mHookTalon;
+  private double currentDisplacement = 0; // start at the bottom
+  private double HookTalonSpeed; // change when you figure out speed per second when Talon.set(1)
+  private double lengthOfHookTalon; // change to length of hook talon in same units as HookTalonSpeed
 
 
   /** Creates a new ExampleSubsystem. */
@@ -29,19 +29,28 @@ public class Climber extends SubsystemBase {
 
   }
 
+  
 
   private void changeHookDisplacement(double increment) {
     double percentOfTalonSpeed = increment / HookTalonSpeed;
-    
-    if(percentOfTalonSpeed < 0) {
-      mHookTalon.setExpiration(-percentOfTalonSpeed);
-      mHookTalon.set(-1);
-    } else {
-      mHookTalon.setExpiration(percentOfTalonSpeed);
-      mHookTalon.set(1);
-    }
 
-    currentDisplacement += increment;
+    double newDisplacement = currentDisplacement + increment;
+
+    if(newDisplacement < 0) {
+      setHookDisplacement(0);
+    } else if(newDisplacement > lengthOfHookTalon) {
+      setHookDisplacement(lengthOfHookTalon);
+    } else {
+      if(percentOfTalonSpeed < 0) {
+        mHookTalon.setExpiration(-percentOfTalonSpeed);
+        mHookTalon.set(-1);
+      } else {
+        mHookTalon.setExpiration(percentOfTalonSpeed);
+        mHookTalon.set(1);
+      }
+
+      currentDisplacement += increment;
+    }
   }
 
   private void setHookDisplacement(double displacement) {
