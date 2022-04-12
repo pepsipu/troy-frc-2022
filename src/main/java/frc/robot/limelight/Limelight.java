@@ -1,7 +1,5 @@
 package frc.robot.limelight;
 
-
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
 /**
  * Subsystem for interacting with the Limelight 2
  */
@@ -20,15 +19,12 @@ public class Limelight extends SubsystemBase { // Unused in favor of direct lime
     public final static int kDefaultPipeline = 0;
     public final static int kSortTopPipeline = 1;
 
- 
-
     private NetworkTable mNetworkTable;
 
     public Limelight(LimelightConstants constants) {
         mConstants = constants;
         mNetworkTable = NetworkTableInstance.getDefault().getTable(constants.kTableName);
     }
-
 
     public static class PeriodicIO {
         // INPUTS
@@ -50,19 +46,16 @@ public class Limelight extends SubsystemBase { // Unused in favor of direct lime
     private LimelightConstants mConstants = null;
     private PeriodicIO mPeriodicIO = new PeriodicIO();
     private boolean mOutputsHaveChanged = true;
-    private double[] mZeroArray = new double[]{0, 0, 0, 0, 0, 0, 0, 0};
+    private double[] mZeroArray = new double[] { 0, 0, 0, 0, 0, 0, 0, 0 };
     private List<TargetInfo> mTargets = new ArrayList<>();
     private boolean mSeesTarget = false;
-
- 
 
     public double getLensHeight() {
         return mConstants.kHeight;
     }
 
-
     public synchronized void readPeriodicInputs() {
-     
+
         mPeriodicIO.givenLedMode = (int) mNetworkTable.getEntry("ledMode").getDouble(1.0);
         mPeriodicIO.givenPipeline = (int) mNetworkTable.getEntry("pipeline").getDouble(0);
         mPeriodicIO.xOffset = mNetworkTable.getEntry("tx").getDouble(0.0);
@@ -87,7 +80,6 @@ public class Limelight extends SubsystemBase { // Unused in favor of direct lime
             mOutputsHaveChanged = false;
         }
     }
-
 
     public synchronized void outputTelemetry() {
         SmartDashboard.putBoolean(mConstants.kName + ": Has Target", mSeesTarget);
@@ -125,11 +117,9 @@ public class Limelight extends SubsystemBase { // Unused in favor of direct lime
         return mSeesTarget;
     }
 
-
-
-
     /**
-     * @return two targets that make up one hatch/port or null if less than two targets are found
+     * @return two targets that make up one hatch/port or null if less than two
+     *         targets are found
      */
     public synchronized List<TargetInfo> getTarget() {
         List<TargetInfo> targets = getRawTargetInfos();
@@ -200,8 +190,6 @@ public class Limelight extends SubsystemBase { // Unused in favor of direct lime
         return extractTopCornersFromBoundingBoxes(xCorners, yCorners);
     }
 
-  
-
     private static final Comparator<Translation2d> xSort = Comparator.comparingDouble(Translation2d::x);
     private static final Comparator<Translation2d> ySort = Comparator.comparingDouble(Translation2d::y);
 
@@ -233,11 +221,12 @@ public class Limelight extends SubsystemBase { // Unused in favor of direct lime
         Translation2d leftCorner = leftTop.get(0);
         Translation2d rightCorner = rightTop.get(1);
 
-        return List.of(new double[]{leftCorner.x(), leftCorner.y()}, new double[]{rightCorner.x(), rightCorner.y()});
+        return List.of(new double[] { leftCorner.x(), leftCorner.y() },
+                new double[] { rightCorner.x(), rightCorner.y() });
     }
 
     public double getLatency() {
         return mPeriodicIO.latency;
     }
-    
+
 }

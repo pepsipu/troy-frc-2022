@@ -1,4 +1,5 @@
 package frc.robot.limelight;
+
 public class TargetInfo { // Unused, only found in java/frc/robot/limelight/Limelight.java which is unused
     protected double x = 1.0;
     protected double y;

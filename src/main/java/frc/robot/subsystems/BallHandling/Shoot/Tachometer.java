@@ -9,18 +9,17 @@ import frc.robot.constants.Constants;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 
+public class Tachometer extends SubsystemBase { // Get flywheel speed, should hopefully be useless with brushless
+                                                // encoders
 
-public class Tachometer extends SubsystemBase { // Get flywheel speed, should hopefully be useless with brushless encoders
-
-  //feeding system
-  private static Counter tacheo; 
-
+  // feeding system
+  private static Counter tacheo;
 
   /** Creates a new ExampleSubsystem. */
   public Tachometer() {
 
     tacheo = new Counter(new DigitalInput(Constants.shooterTachometerPort));
-    
+
   }
 
   public static double getShooterRPM() {
@@ -33,7 +32,7 @@ public class Tachometer extends SubsystemBase { // Get flywheel speed, should ho
   }
 
   @Override
- public void periodic() {
+  public void periodic() {
     // This method will be called once per scheduler run
   }
 
@@ -42,5 +41,4 @@ public class Tachometer extends SubsystemBase { // Get flywheel speed, should ho
     // This method will be called once per scheduler run during simulation
   }
 
-  
 }

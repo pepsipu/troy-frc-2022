@@ -9,7 +9,6 @@ import frc.robot.constants.Constants;
 import frc.robot.subsystems.Climber.ClimberArm;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-
 public class ControlArm extends CommandBase { // Manual control of arm angle
   private final ClimberArm arm;
   private final double armSpeed = 1;
@@ -29,20 +28,21 @@ public class ControlArm extends CommandBase { // Manual control of arm angle
   @Override
   public void execute() {
     // System.out.println("arm");
-    //double armSpeed = RobotContainer.tangoIIController.getXValue();
+    // double armSpeed = RobotContainer.tangoIIController.getXValue();
     // double armSpeed = RobotContainer.secondaryJoystick.getHorizontalMovement();
-    //armSpeed = 0;
-    if(RobotContainer.tertiaryJoystick.joystick.getRawButton(Constants.moveArmAngleToRobot) && !arm.angleLimitPressed()) {
+    // armSpeed = 0;
+    if (RobotContainer.tertiaryJoystick.joystick.getRawButton(Constants.moveArmAngleToRobot)
+        && !arm.angleLimitPressed()) {
       arm.changeArmAngle(-armSpeed);
-    } else if(RobotContainer.tertiaryJoystick.joystick.getRawButton(Constants.moveArmAngleAwayFromRobot)) {
+    } else if (RobotContainer.tertiaryJoystick.joystick.getRawButton(Constants.moveArmAngleAwayFromRobot)) {
       arm.changeArmAngle(armSpeed);
     } else {
       arm.changeArmAngle(0);
     }
-    if(RobotContainer.tertiaryJoystick.joystick.getRawButtonPressed(Constants.resetClimberEncoderButton)) {
+    if (RobotContainer.tertiaryJoystick.joystick.getRawButtonPressed(Constants.resetClimberEncoderButton)) {
       arm.resetEncoder();
     }
-    //System.out.println("arm angle = " + arm.getArmAngleEncoder());
+    // System.out.println("arm angle = " + arm.getArmAngleEncoder());
   }
 
   // Called once the command ends or is interrupted.

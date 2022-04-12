@@ -10,27 +10,23 @@ import frc.robot.constants.Constants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-
 public class TopIndexer extends SubsystemBase { // top indexer
 
-  //feeding system
+  // feeding system
   private final VictorSPX topIndexer;
-
 
   /** Creates a new ExampleSubsystem. */
   public TopIndexer() {
     topIndexer = new VictorSPX(Constants.topIndexerPort);
-  
+
   }
 
-
-  public void setIndexSpeed(double speed){
+  public void setIndexSpeed(double speed) {
     topIndexer.set(ControlMode.PercentOutput, speed);
   }
-  
 
   @Override
- public void periodic() {
+  public void periodic() {
     // This method will be called once per scheduler run
   }
 
@@ -39,5 +35,4 @@ public class TopIndexer extends SubsystemBase { // top indexer
     // This method will be called once per scheduler run during simulation
   }
 
-  
 }

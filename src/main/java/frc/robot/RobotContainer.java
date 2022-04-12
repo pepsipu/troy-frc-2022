@@ -31,7 +31,8 @@ import frc.robot.subsystems.Drive.Gyro;
 import frc.robot.controllers.*;
 import edu.wpi.first.wpilibj.Joystick;
 
-public class RobotContainer { // Initialize all global robot things here like joysticks, init subsystems, keybindings
+public class RobotContainer { // Initialize all global robot things here like joysticks, init subsystems,
+                              // keybindings
   public static boolean inTeleop = true;
   public final static Gyro gyro = new Gyro();
   public final static DriveTrain driveTrain = new DriveTrain();
@@ -43,12 +44,15 @@ public class RobotContainer { // Initialize all global robot things here like jo
   public final static Tachometer tacheo = new Tachometer();
   public final static TopIndexer topIndexer = new TopIndexer();
 
-  //public final static AimbotBall aimball = new AimbotBall(driveTrain);
+  // public final static AimbotBall aimball = new AimbotBall(driveTrain);
 
-  public static FlightJoystickController primaryJoystick = new FlightJoystickController(new Joystick(0)); //drive, turn
-  public static FlightJoystickController secondaryJoystick = new FlightJoystickController(new Joystick(1)); //shoot, set angle
-  public static FlightJoystickController tertiaryJoystick = new FlightJoystickController(new Joystick(2)); //climb (mostly)
-  // public static Tango2Controller tangoIIController = new Tango2Controller(new Tango2Joystick(2)); //climb
+  public static FlightJoystickController primaryJoystick = new FlightJoystickController(new Joystick(0)); // drive, turn
+  public static FlightJoystickController secondaryJoystick = new FlightJoystickController(new Joystick(1)); // shoot,
+                                                                                                            // set angle
+  public static FlightJoystickController tertiaryJoystick = new FlightJoystickController(new Joystick(2)); // climb
+                                                                                                           // (mostly)
+  // public static Tango2Controller tangoIIController = new Tango2Controller(new
+  // Tango2Joystick(2)); //climb
 
   public final static ClimberHooks hooks = new ClimberHooks();
   public final static ClimberArm arm = new ClimberArm();
@@ -60,7 +64,8 @@ public class RobotContainer { // Initialize all global robot things here like jo
   public final static AdjustShooterAim adjustShooterAim = new AdjustShooterAim(driveTrain);
   public final static SetShooterPower setShooterPower = new SetShooterPower(shooter, driveTrain);
   public final static SetShooterPowerManual setShooterPowerManual = new SetShooterPowerManual(shooter);
-  //public final static ShootBallsManual shootBallsManual = new ShootBallsManual(shooter); <- shooter speed constant.
+  // public final static ShootBallsManual shootBallsManual = new
+  // ShootBallsManual(shooter); <- shooter speed constant.
 
   // declare new shooter airmer to be ran, for driveTrain
   public final static ShooterAimer adjustAim = new ShooterAimer(driveTrain);
@@ -68,12 +73,12 @@ public class RobotContainer { // Initialize all global robot things here like jo
   public final static FixServo fixServoCmd = new FixServo(bottomIndexer);
 
   public final static Autonomous autonomous = new Autonomous(driveTrain, arm, shooter, bottomIndexer, topIndexer, gyro);
-  // public final static AutonomousDriveToBall autonomousDrive = new AutonomousDriveToBall(driveTrain, hooks, arm, shooter);
-  // public final static AutonomousShootBall autonomousShoot = new AutonomousShootBall(driveTrain, hooks, arm, shooter);
+  // public final static AutonomousDriveToBall autonomousDrive = new
+  // AutonomousDriveToBall(driveTrain, hooks, arm, shooter);
+  // public final static AutonomousShootBall autonomousShoot = new
+  // AutonomousShootBall(driveTrain, hooks, arm, shooter);
   public final static ManualDrive driveCommand = new ManualDrive(driveTrain);
-  //public final static AimbotBall aimBall = new AimbotBall(driveTrain); 
-
-
+  // public final static AimbotBall aimBall = new AimbotBall(driveTrain);
 
   //
   // public final static SequentialCommandGroup a = new
@@ -102,55 +107,65 @@ public class RobotContainer { // Initialize all global robot things here like jo
      * coDriverStick.btn_12.whenPressed(turretPresets);
      */
     // controller might not actually have any buttons, might be useless code
-    
+
     // JoystickButton collectButton = new JoystickButton(driverStick.joystick, 1);
     // collectButton.whileHeld(autonomousCommand);
 
     // when press button "1" on frc will run shooterAimer, follow shooterAimer for
     // more info
     // Joystick joystick = new Joystick(0);
-    // JoystickButton shooterButton = new JoystickButton(flightJoystick.joystick, 1);
+    // JoystickButton shooterButton = new JoystickButton(flightJoystick.joystick,
+    // 1);
     // shooterButton.whileActiveContinuous(adjustShooter);
     // shooterButton.whenReleased(() -> adjustShooter.cancel());
     /*
-    Trigger manualTrigger = new Trigger(() -> tangoIIController.getSlider() > .5);
-    manualTrigger.whileActiveContinuous(controlHooks);
-    manualTrigger.whileActiveContinuous(controlArm);
-    manualTrigger.whenActive(() -> autoClimb.cancel());
+     * Trigger manualTrigger = new Trigger(() -> tangoIIController.getSlider() >
+     * .5);
+     * manualTrigger.whileActiveContinuous(controlHooks);
+     * manualTrigger.whileActiveContinuous(controlArm);
+     * manualTrigger.whenActive(() -> autoClimb.cancel());
+     * 
+     * Trigger autoTrigger = new Trigger(() -> tangoIIController.getSlider() <= .5);
+     * autoTrigger.whileActiveContinuous(autoClimb);
+     * autoTrigger.whenActive(() -> controlHooks.cancel());
+     * autoTrigger.whenActive(() -> controlArm.cancel());
+     */
 
-    Trigger autoTrigger = new Trigger(() -> tangoIIController.getSlider() <= .5);
-    autoTrigger.whileActiveContinuous(autoClimb);
-    autoTrigger.whenActive(() -> controlHooks.cancel());
-    autoTrigger.whenActive(() -> controlArm.cancel());
-    */
-    
     hooks.setDefaultCommand(controlHooks);
     arm.setDefaultCommand(controlArm);
 
-    //Limelight adjustment code
+    // Limelight adjustment code
     JoystickButton adjustAimButton = new JoystickButton(secondaryJoystick.joystick, Constants.adjustAimButtonNumber);
     adjustAimButton.whileHeld(adjustShooterAim);
 
-    //JoystickButton setShooterButton = new JoystickButton(secondaryJoystick.joystick, Constants.setShooterButtonNumber);
-    //setShooterButton.whileHeld(setShooterPower);
+    // JoystickButton setShooterButton = new
+    // JoystickButton(secondaryJoystick.joystick, Constants.setShooterButtonNumber);
+    // setShooterButton.whileHeld(setShooterPower);
 
-    JoystickButton setShooterManualButton = new JoystickButton(secondaryJoystick.joystick, Constants.setShooterManualButtonNumber);
+    JoystickButton setShooterManualButton = new JoystickButton(secondaryJoystick.joystick,
+        Constants.setShooterManualButtonNumber);
     setShooterManualButton.whileHeld(setShooterPowerManual);
 
-    // JoystickButton indexBottomButton = new JoystickButton(primaryJoystick.joystick, Constants.bottomIndexButtonNumber);
+    // JoystickButton indexBottomButton = new
+    // JoystickButton(primaryJoystick.joystick, Constants.bottomIndexButtonNumber);
     // indexBottomButton.whileHeld(indexBottom);
 
-    // JoystickButton indexTopButton = new JoystickButton(primaryJoystick.joystick, Constants.topIndexButtonNumber);
+    // JoystickButton indexTopButton = new JoystickButton(primaryJoystick.joystick,
+    // Constants.topIndexButtonNumber);
     // indexTopButton.whileHeld(indexTop);
 
-    // JoystickButton shootBallsButton = new JoystickButton(secondaryJoystick.joystick, Constants.shootBallsButtonNumber); // <-- was unused, previously commented out line below to remove conflicting button bindings. can likely be removed due to refactor of ballHandling
+    // JoystickButton shootBallsButton = new
+    // JoystickButton(secondaryJoystick.joystick, Constants.shootBallsButtonNumber);
+    // // <-- was unused, previously commented out line below to remove conflicting
+    // button bindings. can likely be removed due to refactor of ballHandling
     // shootBallsButton.whenHeld(shootBallsManual);
 
     JoystickButton fixServo = new JoystickButton(tertiaryJoystick.joystick, 8);
     fixServo.whenHeld(fixServoCmd);
 
-    //JoystickButton aimbotButton = new JoystickButton(flightJoystick.joystick, Constants.aimbotButtonNumber);
-    //aimbotButton.whenHeld(aimBall);
+    // JoystickButton aimbotButton = new JoystickButton(flightJoystick.joystick,
+    // Constants.aimbotButtonNumber);
+    // aimbotButton.whenHeld(aimBall);
     /**
      * Get the slider position of the HID.
      *
@@ -168,26 +183,26 @@ public class RobotContainer { // Initialize all global robot things here like jo
    * @return the command to run in autonomous
    */
 
-   /*
-    inTeleop = false;
-    Timer t = new Timer();
-    t.start();
-    indexer.setIndexSpeed(.3);
-    ingester.setIngestRollerSpeed(.5);
-
-    // autonomousCommand.schedule();
-    // while (!timer.hasElapsed(2)) {}
-    // shooter.setShooterSpeed(.36); // do change lol .3 old
-    while (t.get() <3) {
-      // ingestPos.changeIngestAngle(-0.5);
-      driveTrain.drive(.6 * (t.get() / 2.5), 0);
-
-    }
-    driveTrain.drive(0, 0);
-    indexer.setIndexSpeed(0);
-    ingester.setIngestRollerSpeed(0);
-    // ingestPos.changeIngestAngle(0);
-*/
+  /*
+   * inTeleop = false;
+   * Timer t = new Timer();
+   * t.start();
+   * indexer.setIndexSpeed(.3);
+   * ingester.setIngestRollerSpeed(.5);
+   * 
+   * // autonomousCommand.schedule();
+   * // while (!timer.hasElapsed(2)) {}
+   * // shooter.setShooterSpeed(.36); // do change lol .3 old
+   * while (t.get() <3) {
+   * // ingestPos.changeIngestAngle(-0.5);
+   * driveTrain.drive(.6 * (t.get() / 2.5), 0);
+   * 
+   * }
+   * driveTrain.drive(0, 0);
+   * indexer.setIndexSpeed(0);
+   * ingester.setIngestRollerSpeed(0);
+   * // ingestPos.changeIngestAngle(0);
+   */
   public void autonomousInit() {
     inTeleop = false;
     autonomous.schedule();

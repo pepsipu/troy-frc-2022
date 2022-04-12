@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class ManualDrive extends CommandBase { // Manual driving
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveTrain drive_train;
 
   /**
@@ -23,11 +23,11 @@ public class ManualDrive extends CommandBase { // Manual driving
     addRequirements(drive_train);
     // Use addRequirements() here to declare subsystem dependencies.
   }
-  
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -43,20 +43,20 @@ public class ManualDrive extends CommandBase { // Manual driving
       zRotation += angleAdjust;
     }
 
-    //set angle
-    if (RobotContainer.secondaryJoystick.getLateralMovement() != 0 || RobotContainer.secondaryJoystick.getHorizontalMovement() != 0) {
+    // set angle
+    if (RobotContainer.secondaryJoystick.getLateralMovement() != 0
+        || RobotContainer.secondaryJoystick.getHorizontalMovement() != 0) {
       System.out.println("setting angle");
       double y = -RobotContainer.secondaryJoystick.getLateralMovement();
-      double x = RobotContainer.secondaryJoystick.getHorizontalMovement();  
-      double angle = Math.toDegrees(Math.atan2(y, x)); //gets angle of the joystick
+      double x = RobotContainer.secondaryJoystick.getHorizontalMovement();
+      double angle = Math.toDegrees(Math.atan2(y, x)); // gets angle of the joystick
       if (y < 0)
-        angle += 360; //make sure angle is within 0˚ to 360˚ scale
-      if (angle < 90){
-         angle += 270;
-      }
-      else{
+        angle += 360; // make sure angle is within 0˚ to 360˚ scale
+      if (angle < 90) {
+        angle += 270;
+      } else {
         angle -= 90;
-      } 
+      }
       zRotation = drive_train.setAngle(angle);
     }
 

@@ -9,11 +9,10 @@ import frc.robot.subsystems.Drive.DriveTrain;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTable;
 
-
-
 /** An example command that uses an example subsystem. */
-public class ShooterAimer extends CommandBase { // conflicts with java/frc/robot/commands/BallHandling/Aiming/AdjustShooterAim.java
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+public class ShooterAimer extends CommandBase { // conflicts with
+                                                // java/frc/robot/commands/BallHandling/Aiming/AdjustShooterAim.java
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveTrain drive_train;
 
   /**
@@ -25,38 +24,37 @@ public class ShooterAimer extends CommandBase { // conflicts with java/frc/robot
     drive_train = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
-  
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {    
+  public void execute() {
 
-      double speed = 0;
-      double rot = 0;
+    double speed = 0;
+    double rot = 0;
 
-      float Kp = -0.1f; //proportional control constant
-      NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
-      float min_command = 0.05f;
-      float tx = (float) networkTable.getEntry("tx").getDouble(0.0);
+    float Kp = -0.1f; // proportional control constant
+    NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
+    float min_command = 0.05f;
+    float tx = (float) networkTable.getEntry("tx").getDouble(0.0);
 
-      float heading_error = -tx;
-      float steering_adjust = 0.0f;
-      if (tx > 1.0) {
-        steering_adjust = Kp * heading_error - min_command;
-      }
-      else if (tx < 1.0) {
-        steering_adjust = Kp * heading_error + min_command;
-      }
-      rot += steering_adjust;
-      System.out.println("auto aim rotation: " + rot);
-
-      drive_train.drive(speed, speed, rot);
+    float heading_error = -tx;
+    float steering_adjust = 0.0f;
+    if (tx > 1.0) {
+      steering_adjust = Kp * heading_error - min_command;
+    } else if (tx < 1.0) {
+      steering_adjust = Kp * heading_error + min_command;
     }
+    rot += steering_adjust;
+    System.out.println("auto aim rotation: " + rot);
+
+    drive_train.drive(speed, speed, rot);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

@@ -1,4 +1,5 @@
 package frc.robot.controllers;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 //normal controller the old boi
@@ -18,11 +19,10 @@ public class FlightJoystickController {
 
     public FlightJoystickController(Joystick joystick) {
         this.joystick = joystick;
-    }   
+    }
 
     public double getHorizontalMovement() {
         double x = joystick.getX();
-
 
         return Math.abs(x) >= deadzone ? k * Math.signum(x) * (Math.log(Math.abs(x) + 1 - deadzone) + c) : 0;
     }
@@ -39,8 +39,8 @@ public class FlightJoystickController {
 
     public boolean backButtonPressed() {
         return joystick.getRawButtonPressed(0);
-    } //POV button for the driver stick
-    
+    } // POV button for the driver stick
+
     public int getJoystickPOV() {
         return joystick.getPOV();
     }

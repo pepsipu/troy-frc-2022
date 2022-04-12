@@ -22,8 +22,8 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
 
   private final ClimberHooks hooks;
   private final ClimberArm arm;
-  private final double MAX_POSITION = 50; //measured in motor rotations, measure later
-  private final double ARM_MOVE_POSITION = 25; //measured in motor rotations, measure later
+  private final double MAX_POSITION = 50; // measured in motor rotations, measure later
+  private final double ARM_MOVE_POSITION = 25; // measured in motor rotations, measure later
   private final Gyro gyro;
 
   /**
@@ -34,12 +34,11 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
   private final double HOOK_POWER = 1;
   private final double ARM_POWER = 0.5;
   private ClimbingStates state = ClimbingStates.LIFTING;
-  private final double climbingAngle = 50; //degrees for climbing under the high bar
+  private final double climbingAngle = 50; // degrees for climbing under the high bar
 
-  private final double kP = 0.5; //multiplicative
-  private final double kI = 0; //coefficient for integral in PID
-  private final double kD = 0; //coefficient for derivative in PID
-
+  private final double kP = 0.5; // multiplicative
+  private final double kI = 0; // coefficient for integral in PID
+  private final double kD = 0; // coefficient for derivative in PID
 
   public AutoClimb(ClimberHooks hooks, ClimberArm arm, Gyro gyro) {
     this.hooks = hooks;
@@ -55,15 +54,16 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
     state = ClimbingStates.LIFTING;
     gyro.setGyroAxis(ADIS16470_IMU.IMUAxis.kZ);
   }
-  public double maintainClimberAngle(){
-    //calculate how off the current climber angle is off from the wanted angle
-    double climberAngle = arm.getArmAngleEncoder() + gyro.getGyroAngle();
-    double adjustment = (climberAngle - climbingAngle)*kP;
 
-    //keeps adjustment between -1 and 1
-    if(adjustment > 1)
+  public double maintainClimberAngle() {
+    // calculate how off the current climber angle is off from the wanted angle
+    double climberAngle = arm.getArmAngleEncoder() + gyro.getGyroAngle();
+    double adjustment = (climberAngle - climbingAngle) * kP;
+
+    // keeps adjustment between -1 and 1
+    if (adjustment > 1)
       adjustment = 1;
-    else if(adjustment < -1)
+    else if (adjustment < -1)
       adjustment = -1;
 
     System.out.println("climber angle: " + climberAngle);
@@ -76,19 +76,18 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
     switch (state) {
       case LIFTING:
         maintainClimberAngle();
-        //hooks.setHookSpeed(-HOOK_POWER);
-        //arm.changeArmAngle(maintainClimberAngle());
-        if (hooks.bottomLimitPressed()){
-          //hooks.setHookSpeed(0);
-          //arm.changeArmAngle(0);
-          //state = ClimbingStates.WAIT;
+        // hooks.setHookSpeed(-HOOK_POWER);
+        // arm.changeArmAngle(maintainClimberAngle());
+        if (hooks.bottomLimitPressed()) {
+          // hooks.setHookSpeed(0);
+          // arm.changeArmAngle(0);
+          // state = ClimbingStates.WAIT;
         }
         break;
       case SECURE_CLIMBER:
-        if(arm.getArmAngleEncoder() < 70){
+        if (arm.getArmAngleEncoder() < 70) {
           arm.changeArmAngle(ARM_POWER);
-        }
-        else{
+        } else {
           arm.changeArmAngle(0);
           state = ClimbingStates.LIFTING_WITH_ARM;
         }
@@ -96,7 +95,7 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
 
       case LIFTING_WITH_ARM:
         hooks.setHookSpeed(-HOOK_POWER);
-        //arm.changeArmAngle(-ARM_POWER);
+        // arm.changeArmAngle(-ARM_POWER);
         if (hooks.bottomLimitPressed()) {
           hooks.setHookSpeed(0);
           arm.changeArmAngle(0);
@@ -111,7 +110,7 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
           state = ClimbingStates.MOVE_TO_HIGH;
         }
         break;
-      
+
       case MOVE_TO_HIGH:
         hooks.setHookSpeed(-HOOK_POWER);
         if (hooks.bottomLimitPressed()) {
@@ -123,13 +122,12 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
           }
         }
         break;
-      
+
       default:
         System.err.println("No state is true");
         break;
     }
   }
-
 
   // Called once the command ends or is interrupted.
   @Override

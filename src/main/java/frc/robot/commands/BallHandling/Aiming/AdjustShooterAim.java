@@ -11,16 +11,17 @@ import frc.robot.subsystems.Drive.DriveTrain;
 import edu.wpi.first.math.controller.PIDController;
 
 /** An example command that uses an example subsystem. */
-public class AdjustShooterAim extends CommandBase { // conflicts with java/frc/robot/commands/BallHandling/Aiming/ShooterAimer.java
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+public class AdjustShooterAim extends CommandBase { // conflicts with
+                                                    // java/frc/robot/commands/BallHandling/Aiming/ShooterAimer.java
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveTrain driveTrain;
   private NetworkTableInstance inst;
   private NetworkTable table;
   private PIDController pidcontrol;
   private final float kp = 0.03f;
   private final float ki = 0.01f;
-  private final float kd = 0.02f; 
-  
+  private final float kd = 0.02f;
+
   /**
    * Creates a new ExampleCommand.
    *
@@ -46,7 +47,7 @@ public class AdjustShooterAim extends CommandBase { // conflicts with java/frc/r
     float tx = table.getEntry("tx").getNumber(0).floatValue() * kp;
     double steering_adjust = pidcontrol.calculate(tx);
     driveTrain.drive(0, 0, steering_adjust);
-    
+
   }
 
   // Called once the command ends or is interrupted.
@@ -58,5 +59,5 @@ public class AdjustShooterAim extends CommandBase { // conflicts with java/frc/r
   @Override
   public boolean isFinished() {
     return false;
-  } 
+  }
 }

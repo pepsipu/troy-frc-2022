@@ -9,17 +9,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import  com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class BottomIndexer extends SubsystemBase { // Handles bottom indexer, which is connected to the ingester
 
-    //feeding system
-    private final VictorSPX bottomIndexer;
-    private final Servo servo;
+  // feeding system
+  private final VictorSPX bottomIndexer;
+  private final Servo servo;
 
-    
-//pushing ball backwards in limit switch is activated, greenwheel at bottom spins when ingesting
-
+  // pushing ball backwards in limit switch is activated, greenwheel at bottom
+  // spins when ingesting
 
   /** Creates a new ExampleSubsystem. */
   public BottomIndexer() {
@@ -27,14 +26,14 @@ public class BottomIndexer extends SubsystemBase { // Handles bottom indexer, wh
     servo = new Servo(Constants.ingesterServo);
   }
 
-
-  public void setIndexSpeed(double speed){
+  public void setIndexSpeed(double speed) {
     bottomIndexer.set(ControlMode.PercentOutput, speed);
   }
 
   public void releaseServo() {
     servo.set(1);
   }
+
   public void setServo(double pos) {
     servo.set(pos);
   }
@@ -49,5 +48,4 @@ public class BottomIndexer extends SubsystemBase { // Handles bottom indexer, wh
     // This method will be called once per scheduler run during simulation
   }
 
-  
 }

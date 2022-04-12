@@ -19,7 +19,8 @@ import frc.robot.RobotContainer;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.Drive.DriveTrain;
 
-public class DriveTrain extends SubsystemBase { // All drive related functionality, like setting angle as well as actual driving
+public class DriveTrain extends SubsystemBase { // All drive related functionality, like setting angle as well as actual
+                                                // driving
 
   private static CANSparkMax frontLeft;
   private static CANSparkMax frontRight;
@@ -62,68 +63,70 @@ public class DriveTrain extends SubsystemBase { // All drive related functionali
 
     m_dDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
 
-    m_dDrive.setSafetyEnabled(false); 
+    m_dDrive.setSafetyEnabled(false);
 
     gyro = new Gyro();
 
   }
 
-
   public void drive(double ySpeed, double xSpeed, double zRotation) {
     m_dDrive.driveCartesian(ySpeed, xSpeed, zRotation, -gyro.getGyroAngle());
-    if(RobotContainer.primaryJoystick.button8Pressed()){
-      
+    if (RobotContainer.primaryJoystick.button8Pressed()) {
+
     }
   }
 
   public void driveRR(double ySpeed, double xSpeed, double zRotation) {
     m_dDrive.driveCartesian(ySpeed, xSpeed, zRotation, 0);
-    if(RobotContainer.primaryJoystick.button8Pressed()){
+    if (RobotContainer.primaryJoystick.button8Pressed()) {
       gyro.resetGyroAngle();
     }
   }
 
-  public double setAngle(double angle){
+  public double setAngle(double angle) {
 
-      double angleDifference = angle - gyro.getGyroAngle(); //gets angle difference
+    double angleDifference = angle - gyro.getGyroAngle(); // gets angle difference
 
-      if (Math.abs(angleDifference) >= 180)
-        angleDifference = angleDifference + (angleDifference > 0 ? -360 : 360); //ensures that angleDifference is the smallest possible angle to destination
+    if (Math.abs(angleDifference) >= 180)
+      angleDifference = angleDifference + (angleDifference > 0 ? -360 : 360); // ensures that angleDifference is the
+                                                                              // smallest possible angle to destination
 
-      // positive angleDifference -> turn clockwise, negative angleDifference -> turn counterclockwise
-      // strength of turning power is proportional to size of angleDifference
-      double zRotation = angleDifference/120;
-      if (zRotation > 1)
-        zRotation = 1;
-      else if (zRotation < -1)
-        zRotation = -1;
-      return zRotation;
+    // positive angleDifference -> turn clockwise, negative angleDifference -> turn
+    // counterclockwise
+    // strength of turning power is proportional to size of angleDifference
+    double zRotation = angleDifference / 120;
+    if (zRotation > 1)
+      zRotation = 1;
+    else if (zRotation < -1)
+      zRotation = -1;
+    return zRotation;
   }
 
   public double getAdjustment() {
     double adjustAngle = 0;
-    if(seeBall.getBoolean(false)){
+    if (seeBall.getBoolean(false)) {
       double adjustment = ball.getNumber(0).doubleValue();
       double minPower = 0.2;
-      if(adjustment < minPower && adjustment > 0){
+      if (adjustment < minPower && adjustment > 0) {
         adjustment = minPower;
-      }
-      else if(adjustment > -minPower && adjustment < 0){
+      } else if (adjustment > -minPower && adjustment < 0) {
         adjustment = -minPower;
       }
-      //double angle = -gyro.getAngle();
+      // double angle = -gyro.getAngle();
       adjustAngle = adjustment;
-      
-    };
+
+    }
+    ;
     return adjustAngle;
   }
 
   public double getPosition() {
-    double[] encoderPositions = {frontLeftEncoder.getPosition(), frontRightEncoder.getPosition(), rearLeftEncoder.getPosition(), rearRightEncoder.getPosition()};
+    double[] encoderPositions = { frontLeftEncoder.getPosition(), frontRightEncoder.getPosition(),
+        rearLeftEncoder.getPosition(), rearRightEncoder.getPosition() };
     double sum = 0;
     for (double i : encoderPositions)
       sum += i;
-    return sum/4;
+    return sum / 4;
   }
 
   public double getFrontLeftEncoderPosition() {
@@ -155,5 +158,5 @@ public class DriveTrain extends SubsystemBase { // All drive related functionali
   public void stopMotors() {
     m_dDrive.stopMotor();
   }
-  
+
 }

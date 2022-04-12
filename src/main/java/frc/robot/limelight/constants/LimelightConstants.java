@@ -4,5 +4,5 @@ public class LimelightConstants { // Unused, only found in java/frc/robot/limeli
     public String kName = "food";
     public String kTableName = "food";
     public double kHeight = 0.0;
- 
+
 }

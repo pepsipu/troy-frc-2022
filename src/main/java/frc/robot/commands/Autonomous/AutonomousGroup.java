@@ -3,12 +3,13 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class AutonomousGroup extends SequentialCommandGroup { // UNUSED, ALL AUTON CODE IS IN java/frc/robot/commands/Autonomous/Autonomous.java
-    public AutonomousGroup(Command a, Command b) {
-        addCommands(a, b);
-    }
+public class AutonomousGroup extends SequentialCommandGroup { // UNUSED, ALL AUTON CODE IS IN
+                                                              // java/frc/robot/commands/Autonomous/Autonomous.java
+  public AutonomousGroup(Command a, Command b) {
+    addCommands(a, b);
+  }
 
-    // Called when the command is initially scheduled.
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -16,7 +17,7 @@ public class AutonomousGroup extends SequentialCommandGroup { // UNUSED, ALL AUT
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -29,4 +30,3 @@ public class AutonomousGroup extends SequentialCommandGroup { // UNUSED, ALL AUT
     return false;
   }
 }
- 

@@ -10,7 +10,7 @@ import frc.robot.subsystems.BallHandling.IndexAndIngest.BottomIndexer;
 public class FixServo extends CommandBase { // Only used in pre-match, to reset the servo holding the ingester.
   private final BottomIndexer ingest;
   public boolean isTopHit = false;
-  
+
   /**
    * Creates a new ExampleCommand.
    *

@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class ControlHooks extends CommandBase { // Manual control of hook position.
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberHooks climber;
-  private final double MAX_POSITION = 50; //measured in motor rotations, measure later
+  private final double MAX_POSITION = 50; // measured in motor rotations, measure later
+
   /**
    * Creates a new ExampleCommand.
    *
@@ -34,27 +35,26 @@ public class ControlHooks extends CommandBase { // Manual control of hook positi
   @Override
   public void execute() {
     // System.out.println("hook");
-    //double hookSpeed = RobotContainer.tangoIIController.getZValue(); 
-    double hookSpeed = RobotContainer.tertiaryJoystick.getLateralMovement(); 
-    // if ((hookSpeed > 0 && climber.getEncoderPosition() >= MAX_POSITION) || (hookSpeed < 0 && climber.getEncoderPosition() <= 0)) ;
-      //do nothing
+    // double hookSpeed = RobotContainer.tangoIIController.getZValue();
+    double hookSpeed = RobotContainer.tertiaryJoystick.getLateralMovement();
+    // if ((hookSpeed > 0 && climber.getEncoderPosition() >= MAX_POSITION) ||
+    // (hookSpeed < 0 && climber.getEncoderPosition() <= 0)) ;
+    // do nothing
     // else
-    if (climber.bottomLimitPressed()){
+    if (climber.bottomLimitPressed()) {
       climber.setPosition(0);
-      if(hookSpeed < 0){
+      if (hookSpeed < 0) {
         climber.setHookSpeed(hookSpeed);
-      }
-      else{
+      } else {
         climber.setHookSpeed(0);
       }
-    }
-    else{
+    } else {
       climber.setHookSpeed(hookSpeed);
     }
 
-
     // System.out.print("" + armSpeed + " " + hookSpeed);
-    // System.out.println("Arm speed: " + climber.getArmAngleSpeed() + " Hook speed: " + climber.getHookSpeed());    
+    // System.out.println("Arm speed: " + climber.getArmAngleSpeed() + " Hook speed:
+    // " + climber.getHookSpeed());
   }
 
   // Called once the command ends or is interrupted.
@@ -68,5 +68,4 @@ public class ControlHooks extends CommandBase { // Manual control of hook positi
     return false;
   }
 
-  
 }
