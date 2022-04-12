@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Drive;
 
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive.DriveTrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -60,7 +61,24 @@ public class ManualDrive extends CommandBase { // Manual driving
       zRotation = drive_train.setAngle(angle);
     }
 
-    drive_train.drive(ySpeed, xSpeed, zRotation);
+    if (RobotContainer.primaryJoystick.getJoystickPOV() == 0)
+      drive_train.drive(0.25, 0, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 45)
+      drive_train.drive(0.25, -0.25, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 90)
+      drive_train.drive(0, -0.25, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 135)
+      drive_train.drive(-0.25, -0.25, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 180)
+      drive_train.drive(-0.25, 0, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 225)
+      drive_train.drive(-0.25, 0.25, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 270)
+      drive_train.drive(0, 0.25, 0);
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 315)
+      drive_train.drive(0.25, 0.25, 0);
+    else
+      drive_train.drive(ySpeed, xSpeed, zRotation);
 
   }
 
