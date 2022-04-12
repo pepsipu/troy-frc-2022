@@ -12,12 +12,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class ControlHooks extends CommandBase { // Manual control of hook position.
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberHooks climber;
-<<<<<<< HEAD:src/main/java/frc/robot/commands/ControlHooks.java
-  private final double MAX_POSITION = 282.5; //measured in motor rotations, measure later
-=======
   private final double MAX_POSITION = 50; // measured in motor rotations, measure later
 
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/ControlHooks.java
   /**
    * Creates a new ExampleCommand.
    *
@@ -48,21 +44,12 @@ public class ControlHooks extends CommandBase { // Manual control of hook positi
     // else
     if (climber.bottomLimitPressed()) {
       climber.setPosition(0);
-<<<<<<< HEAD:src/main/java/frc/robot/commands/ControlHooks.java
-      climber.setHookSpeed(hookSpeed < 0 ? hookSpeed : 0);
-    }
-    else if(climber.getEncoderPosition() >= MAX_POSITION){
-      climber.setHookSpeed(hookSpeed > 0 ? hookSpeed : 0);
-    }
-    else{
-=======
       if (hookSpeed < 0) {
         climber.setHookSpeed(hookSpeed);
       } else {
         climber.setHookSpeed(0);
       }
     } else {
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/ControlHooks.java
       climber.setHookSpeed(hookSpeed);
     }
 
