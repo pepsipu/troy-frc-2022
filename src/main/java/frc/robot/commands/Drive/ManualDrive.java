@@ -53,32 +53,40 @@ public class ManualDrive extends CommandBase { // Manual driving
       double angle = Math.toDegrees(Math.atan2(y, x)); // gets angle of the joystick
       if (y < 0)
         angle += 360; // make sure angle is within 0˚ to 360˚ scale
-      if (angle < 90) {
-        angle += 270;
-      } else {
-        angle -= 90;
-      }
+      angle += angle < 90 ? 270 : -90;
       zRotation = drive_train.setAngle(angle);
     }
 
-    if (RobotContainer.primaryJoystick.getJoystickPOV() == 0)
-      drive_train.drive(0.25, 0, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 45)
-      drive_train.drive(0.25, -0.25, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 90)
-      drive_train.drive(0, -0.25, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 135)
-      drive_train.drive(-0.25, -0.25, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 180)
-      drive_train.drive(-0.25, 0, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 225)
-      drive_train.drive(-0.25, 0.25, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 270)
-      drive_train.drive(0, 0.25, 0);
-    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 315)
-      drive_train.drive(0.25, 0.25, 0);
-    else
-      drive_train.drive(ySpeed, xSpeed, zRotation);
+    // microadjustment
+    if (RobotContainer.primaryJoystick.getJoystickPOV() == 0) {
+      ySpeed += 0.25;
+    {
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 315) {
+      ySpeed += 0.25;
+      xSpeed -= 0.25;
+    {
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 270) {
+      xSpeed -= 0.25;
+    {
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 225) {
+      ySpeed -= 0.25;
+      xSpeed -= 0.25;
+    }
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 180) {
+      ySpeed -= 0.25;
+    }
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 135) {
+      ySpeed -= 0.25;
+      xSpeed += 0.25;
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 90) {
+      xSpeed += 0.25;
+    }
+    else if (RobotContainer.primaryJoystick.getJoystickPOV() == 45) {
+      ySpeed += 0.25;
+      xSpeed += 0.25;
+    }
+
+    drive_train.drive(ySpeed, xSpeed, zRotation);
 
   }
 
