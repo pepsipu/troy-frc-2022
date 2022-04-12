@@ -1,15 +1,14 @@
-package frc.robot.commands.Autonomous;
+package frc.robot.commands;
 
+import frc.robot.subsystems.ClimberArm;
+import frc.robot.subsystems.ClimberHooks;
+import frc.robot.subsystems.DriveTrain;
 // import frc.robot.subsystems.Tachometer;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallHandling.Shooter;
-import frc.robot.subsystems.Climber.ClimberArm;
-import frc.robot.subsystems.Climber.ClimberHooks;
-import frc.robot.subsystems.Drive.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
-public class AutonomousDriveToBall extends CommandBase { // UNUSED, ALL AUTON CODE IS IN
-                                                         // java/frc/robot/commands/Autonomous/Autonomous.java
+public class AutonomousDriveToBall extends CommandBase {
   /**
    * Creates a new AutonomousCommand.
    */
@@ -23,10 +22,11 @@ public class AutonomousDriveToBall extends CommandBase { // UNUSED, ALL AUTON CO
   private final double SHOOTER_SPEED = 0.2;
   private final double INDEX_SPEED = -0.3;
   private final double SLIDE_HOOK_SPEED = .4;
-  private double xSpeed = 0;
-  private double ySpeed = 0;
-  private double zRotation = 0;
-  private final double MAX_POSITION = 50; // measured in motor rotations, measure later
+  private double xSpeed= 0;
+  private double ySpeed= 0; 
+  private double zRotation=0;
+  private final double MAX_POSITION = 50; //measured in motor rotations, measure later
+
 
   public AutonomousDriveToBall(DriveTrain drive, ClimberHooks climber, ClimberArm arm, Shooter shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -50,8 +50,8 @@ public class AutonomousDriveToBall extends CommandBase { // UNUSED, ALL AUTON CO
   @Override
   public void execute() {
     if (drive.getPosition() <= MAX_POSITION) {
-      // xSpeed += drive.getAdjustment()[0];
-      // ySpeed += drive.getAdjustment()[1];
+      //xSpeed += drive.getAdjustment()[0];
+      //ySpeed += drive.getAdjustment()[1];
       drive.drive(ySpeed, xSpeed, 0);
     }
   }

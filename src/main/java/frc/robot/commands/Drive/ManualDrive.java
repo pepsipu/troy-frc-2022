@@ -52,7 +52,9 @@ public class ManualDrive extends CommandBase { // Manual driving
       double x = RobotContainer.secondaryJoystick.getHorizontalMovement();
       double angle = Math.toDegrees(Math.atan2(y, x)); // gets angle of the joystick
       if (y < 0)
+      {
         angle += 360; // make sure angle is within 0˚ to 360˚ scale
+       }
       angle += angle < 90 ? 270 : -90;
       zRotation = drive_train.setAngle(angle);
     }
@@ -60,14 +62,14 @@ public class ManualDrive extends CommandBase { // Manual driving
     // microadjustment
     if (RobotContainer.primaryJoystick.getJoystickPOV() == 0) {
       ySpeed += 0.25;
-    {
+    }
     else if (RobotContainer.primaryJoystick.getJoystickPOV() == 315) {
       ySpeed += 0.25;
       xSpeed -= 0.25;
-    {
+    }
     else if (RobotContainer.primaryJoystick.getJoystickPOV() == 270) {
       xSpeed -= 0.25;
-    {
+    }
     else if (RobotContainer.primaryJoystick.getJoystickPOV() == 225) {
       ySpeed -= 0.25;
       xSpeed -= 0.25;
@@ -78,6 +80,7 @@ public class ManualDrive extends CommandBase { // Manual driving
     else if (RobotContainer.primaryJoystick.getJoystickPOV() == 135) {
       ySpeed -= 0.25;
       xSpeed += 0.25;
+    }
     else if (RobotContainer.primaryJoystick.getJoystickPOV() == 90) {
       xSpeed += 0.25;
     }

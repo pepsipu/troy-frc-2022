@@ -2,9 +2,9 @@ package frc.robot.commands.BallHandling;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.subsystems.BallHandling.IndexAndIngest.BottomIndexer;
-import frc.robot.subsystems.BallHandling.IndexAndIngest.TopIndexer;
-import frc.robot.subsystems.BallHandling.Shoot.Shooter;
+import frc.robot.subsystems.BallHandling.BottomIndexer;
+import frc.robot.subsystems.BallHandling.Shooter;
+import frc.robot.subsystems.BallHandling.TopIndexer;
 import frc.robot.RobotContainer;
 import frc.robot.constants.Constants;
 

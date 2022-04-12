@@ -8,50 +8,25 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-<<<<<<< HEAD
-
-import frc.robot.commands.AutonomousDriveToBall;
-import frc.robot.commands.ManualDrive;
-import frc.robot.commands.SetShooterPower;
-import frc.robot.commands.SetShooterPowerManual;
-import frc.robot.commands.ControlArm;
-import frc.robot.commands.ControlHooks;
-import frc.robot.commands.FixServo;
-import frc.robot.commands.ShooterAimer;
-import frc.robot.commands.BallHandling;
-import frc.robot.commands.AdjustShooterAim;
-import frc.robot.commands.AutoClimb;
-import frc.robot.commands.Autonomous;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ClimberArm;
-import frc.robot.subsystems.ClimberHooks;
-import frc.robot.subsystems.BottomIndexer;
-import frc.robot.subsystems.TopIndexer;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Gyro;
-
-=======
 import frc.robot.commands.Autonomous.Autonomous;
+import frc.robot.commands.BallHandling.AdjustShooterAim;
 import frc.robot.commands.BallHandling.BallHandling;
-import frc.robot.commands.BallHandling.Aiming.AdjustShooterAim;
-import frc.robot.commands.BallHandling.Aiming.ShooterAimer;
-import frc.robot.commands.BallHandling.Shooter.SetShooterPower;
-import frc.robot.commands.BallHandling.Shooter.SetShooterPowerManual;
+import frc.robot.commands.BallHandling.SetShooterPower;
+import frc.robot.commands.BallHandling.SetShooterPowerManual;
+import frc.robot.commands.BallHandling.ShooterAimer;
 import frc.robot.commands.Climber.AutoClimb;
 import frc.robot.commands.Climber.ControlArm;
 import frc.robot.commands.Climber.ControlHooks;
 import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.commands.PreMatch.FixServo;
 import frc.robot.constants.Constants;
-import frc.robot.subsystems.BallHandling.IndexAndIngest.BottomIndexer;
-import frc.robot.subsystems.BallHandling.IndexAndIngest.TopIndexer;
-import frc.robot.subsystems.BallHandling.Shoot.Shooter;
-import frc.robot.subsystems.BallHandling.Shoot.Tachometer;
+import frc.robot.subsystems.BallHandling.BottomIndexer;
+import frc.robot.subsystems.BallHandling.Shooter;
+import frc.robot.subsystems.BallHandling.TopIndexer;
 import frc.robot.subsystems.Climber.ClimberArm;
 import frc.robot.subsystems.Climber.ClimberHooks;
 import frc.robot.subsystems.Drive.DriveTrain;
 import frc.robot.subsystems.Drive.Gyro;
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204
 import frc.robot.controllers.*;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -95,17 +70,11 @@ public class RobotContainer { // Initialize all global robot things here like jo
 
   public final static FixServo fixServoCmd = new FixServo(bottomIndexer);
 
-<<<<<<< HEAD
   public final static Autonomous autonomous = new Autonomous(driveTrain, hooks, arm, shooter, bottomIndexer, topIndexer);
-  // public final static AutonomousDriveToBall autonomousDrive = new AutonomousDriveToBall(driveTrain, hooks, arm, shooter);
-  // public final static AutonomousShootBall autonomousShoot = new AutonomousShootBall(driveTrain, hooks, arm, shooter);
-=======
-  public final static Autonomous autonomous = new Autonomous(driveTrain, arm, shooter, bottomIndexer, topIndexer, gyro);
   // public final static AutonomousDriveToBall autonomousDrive = new
   // AutonomousDriveToBall(driveTrain, hooks, arm, shooter);
   // public final static AutonomousShootBall autonomousShoot = new
   // AutonomousShootBall(driveTrain, hooks, arm, shooter);
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204
   public final static ManualDrive driveCommand = new ManualDrive(driveTrain);
   // public final static AimbotBall aimBall = new AimbotBall(driveTrain);
 
@@ -160,18 +129,8 @@ public class RobotContainer { // Initialize all global robot things here like jo
      * autoTrigger.whenActive(() -> controlArm.cancel());
      */
 
-<<<<<<< HEAD
-    Trigger autoTrigger = new Trigger(() -> tangoIIController.getSlider() <= .5);
-    autoTrigger.whileActiveContinuous(autoClimb);
-    autoTrigger.whenActive(() -> controlHooks.cancel());
-    autoTrigger.whenActive(() -> controlArm.cancel());
-    */
-    
-    
-=======
     hooks.setDefaultCommand(controlHooks);
     arm.setDefaultCommand(controlArm);
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204
 
     // Limelight adjustment code
     JoystickButton adjustAimButton = new JoystickButton(secondaryJoystick.joystick, Constants.adjustAimButtonNumber);
@@ -202,17 +161,9 @@ public class RobotContainer { // Initialize all global robot things here like jo
     JoystickButton fixServo = new JoystickButton(tertiaryJoystick.joystick, 8);
     fixServo.whenHeld(fixServoCmd);
 
-<<<<<<< HEAD
-    JoystickButton activateAutoClimbButton = new JoystickButton(tertiaryJoystick.joystick, Constants.activateAutoClimbButtonNumber);
-    activateAutoClimbButton.whileHeld(autoClimb);
-
-    //JoystickButton aimbotButton = new JoystickButton(flightJoystick.joystick, Constants.aimbotButtonNumber);
-    //aimbotButton.whenHeld(aimBall);
-=======
     // JoystickButton aimbotButton = new JoystickButton(flightJoystick.joystick,
     // Constants.aimbotButtonNumber);
     // aimbotButton.whenHeld(aimBall);
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204
     /**
      * Get the slider position of the HID.
      *

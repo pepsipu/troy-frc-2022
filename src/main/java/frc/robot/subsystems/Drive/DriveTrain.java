@@ -67,37 +67,22 @@ public class DriveTrain extends SubsystemBase { // All drive related functionali
   }
 
   public void drive(double ySpeed, double xSpeed, double zRotation) {
-<<<<<<< HEAD:src/main/java/frc/robot/subsystems/DriveTrain.java
-    m_dDrive.driveCartesian(ySpeed, xSpeed, zRotation, -Gyro.getGyroAngle());
-    if(RobotContainer.primaryJoystick.button8Pressed()){
-      
-=======
-    m_dDrive.driveCartesian(ySpeed, xSpeed, zRotation, -gyro.getGyroAngle());
+    m_dDrive.driveCartesian(ySpeed, xSpeed, zRotation, -1*Gyro.getGyroAngle());
     if (RobotContainer.primaryJoystick.button8Pressed()) {
 
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/subsystems/Drive/DriveTrain.java
     }
   }
 
   public void driveRR(double ySpeed, double xSpeed, double zRotation) {
     m_dDrive.driveCartesian(ySpeed, xSpeed, zRotation, 0);
-<<<<<<< HEAD:src/main/java/frc/robot/subsystems/DriveTrain.java
-    if(RobotContainer.primaryJoystick.button8Pressed()){
-      Gyro.resetGyroAngle();
-=======
     if (RobotContainer.primaryJoystick.button8Pressed()) {
-      gyro.resetGyroAngle();
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/subsystems/Drive/DriveTrain.java
+      Gyro.resetGyroAngle();
     }
   }
 
   public double setAngle(double angle) {
 
-<<<<<<< HEAD:src/main/java/frc/robot/subsystems/DriveTrain.java
-      double angleDifference = angle - Gyro.getGyroAngle(); //gets angle difference
-=======
-    double angleDifference = angle - gyro.getGyroAngle(); // gets angle difference
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/subsystems/Drive/DriveTrain.java
+    double angleDifference = angle - Gyro.getGyroAngle(); // gets angle difference
 
     if (Math.abs(angleDifference) >= 180)
       angleDifference = angleDifference + (angleDifference > 0 ? -360 : 360); // ensures that angleDifference is the

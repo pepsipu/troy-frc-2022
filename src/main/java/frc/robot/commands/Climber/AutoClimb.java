@@ -4,25 +4,15 @@
 
 package frc.robot.commands.Climber;
 
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
-import frc.robot.subsystems.ClimberHooks;
-import frc.robot.Constants;
+import frc.robot.subsystems.Climber.ClimberHooks;
+import frc.robot.constants.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ClimberArm;
+import frc.robot.subsystems.Climber.ClimberArm;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 // this does climb auto
 public class AutoClimb extends CommandBase {
-=======
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber.ClimberArm;
-import frc.robot.subsystems.Climber.ClimberHooks;
-import frc.robot.subsystems.Drive.Gyro;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
-
-public class AutoClimb extends CommandBase { // Automatic climbing, not implemented
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
   private enum ClimbingStates {
     LIFTING_NO_ANGLE,
     LIFTING_WITH_ANGLE,
@@ -35,14 +25,8 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
 
   private final ClimberHooks hooks;
   private final ClimberArm arm;
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
   private final double MAX_POSITION = 282.5; //measured in motor rotations, measure later
   private final double ARM_MOVE_POSITION = 25; //measured in motor rotations, measure later
-=======
-  private final double MAX_POSITION = 50; // measured in motor rotations, measure later
-  private final double ARM_MOVE_POSITION = 25; // measured in motor rotations, measure later
-  private final Gyro gyro;
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
 
   /**
    * Creates a new ExampleCommand.
@@ -51,7 +35,6 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
    */
   private final double HOOK_POWER = 1;
   private final double ARM_POWER = 0.5;
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
   private ClimbingStates state = ClimbingStates.LIFTING_NO_ANGLE;
   private final double climbingAngle = 46; //degrees for climbing under the high bar
 
@@ -61,14 +44,6 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
 
   private boolean inPos = false;
   private boolean correctAngle = false;
-=======
-  private ClimbingStates state = ClimbingStates.LIFTING;
-  private final double climbingAngle = 50; // degrees for climbing under the high bar
-
-  private final double kP = 0.5; // multiplicative
-  private final double kI = 0; // coefficient for integral in PID
-  private final double kD = 0; // coefficient for derivative in PID
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
 
 
   public AutoClimb(ClimberHooks hooks, ClimberArm arm) {
@@ -86,23 +61,12 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
     inPos = false;
     timer.start();
   }
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
   public double maintainClimberAngle(){
     //calculate how off the current climber angle is off from the wanted angle
     double climberAngle = arm.getArmAngleEncoder();
     double adjustment = (climbingAngle - climberAngle) * kP;
     //keeps adjustment between -1 and 1
     if(adjustment > 1)
-=======
-
-  public double maintainClimberAngle() {
-    // calculate how off the current climber angle is off from the wanted angle
-    double climberAngle = arm.getArmAngleEncoder() + gyro.getGyroAngle();
-    double adjustment = (climberAngle - climbingAngle) * kP;
-
-    // keeps adjustment between -1 and 1
-    if (adjustment > 1)
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
       adjustment = 1;
     else if (adjustment < -1)
       adjustment = -1;
@@ -117,36 +81,10 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
       state = ClimbingStates.LIFTING_NO_ANGLE;
     }
     switch (state) {
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
       case LIFTING_NO_ANGLE:
         arm.changeArmAngle(0);
         hooks.setHookSpeed(0.5);
         if (hooks.getEncoderPosition() < 110){
-=======
-      case LIFTING:
-        maintainClimberAngle();
-        // hooks.setHookSpeed(-HOOK_POWER);
-        // arm.changeArmAngle(maintainClimberAngle());
-        if (hooks.bottomLimitPressed()) {
-          // hooks.setHookSpeed(0);
-          // arm.changeArmAngle(0);
-          // state = ClimbingStates.WAIT;
-        }
-        break;
-      case SECURE_CLIMBER:
-        if (arm.getArmAngleEncoder() < 70) {
-          arm.changeArmAngle(ARM_POWER);
-        } else {
-          arm.changeArmAngle(0);
-          state = ClimbingStates.LIFTING_WITH_ARM;
-        }
-        break;
-
-      case LIFTING_WITH_ARM:
-        hooks.setHookSpeed(-HOOK_POWER);
-        // arm.changeArmAngle(-ARM_POWER);
-        if (hooks.bottomLimitPressed()) {
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
           hooks.setHookSpeed(0);
           state = ClimbingStates.LIFTING_WITH_ANGLE;
         }
@@ -160,18 +98,12 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
           arm.changeArmAngle(0);
           state = ClimbingStates.MOVE_TO_HIGH;
         }
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
       break;
-=======
-        break;
-
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
       case MOVE_TO_HIGH:
         if (hooks.bottomLimitPressed()){
           hooks.setHookSpeed(0);
           inPos = true;
         }
-<<<<<<< HEAD:src/main/java/frc/robot/commands/AutoClimb.java
         else{
           hooks.setHookSpeed(0.5);
         }
@@ -208,10 +140,6 @@ public class AutoClimb extends CommandBase { // Automatic climbing, not implemen
 
       break;
       
-=======
-        break;
-
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/commands/Climber/AutoClimb.java
       default:
         //System.err.println("No state is true");
         break;

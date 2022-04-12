@@ -5,7 +5,7 @@
 package frc.robot.commands.PreMatch;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallHandling.IndexAndIngest.BottomIndexer;
+import frc.robot.subsystems.BallHandling.BottomIndexer;
 
 public class FixServo extends CommandBase { // Only used in pre-match, to reset the servo holding the ingester.
   private final BottomIndexer ingest;

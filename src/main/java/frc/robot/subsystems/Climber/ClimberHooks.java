@@ -44,15 +44,10 @@ public class ClimberHooks extends SubsystemBase { // Climber hooks
     return hook.get();
   }
 
-  public boolean bottomLimitPressed() {
-<<<<<<< HEAD:src/main/java/frc/robot/subsystems/ClimberHooks.java
-    //System.out.println(bottomLimitSwitch.get());
-    return !bottomLimitSwitch.get();
-=======
-    // System.out.println(bottomLimitSwitch.get());
-    return bottomLimitSwitch.get();
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/subsystems/Climber/ClimberHooks.java
-  }
+  public boolean bottomLimitPressed() 
+    {
+      return bottomLimitPressed();  
+    }
 
   public boolean topOrBottomLimitPressed() {
     return bottomLimitPressed();

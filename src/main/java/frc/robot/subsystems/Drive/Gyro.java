@@ -11,7 +11,7 @@ public class Gyro extends SubsystemBase { // Gyro for robot angle
     gyro.setYawAxis(ADIS16470_IMU.IMUAxis.kY);
   }
 
-  public double getGyroAngle() {
+  public static double getGyroAngle() {
     return gyro.getAngle();
   }
 
@@ -19,7 +19,7 @@ public class Gyro extends SubsystemBase { // Gyro for robot angle
     gyro.setYawAxis(axis);
   }
 
-  public void resetGyroAngle() {
+  public static void resetGyroAngle() {
     gyro.reset();
   }
 

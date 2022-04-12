@@ -57,13 +57,10 @@ public final class Constants { // Constants
     public static final int resetClimberEncoderButton = 11;
     public static final int moveArmAngleToRobot = 2;
     public static final int moveArmAngleAwayFromRobot = 3;
-<<<<<<< HEAD:src/main/java/frc/robot/Constants.java
     //switch between auto and manual climb
     public static final int activateAutoClimbButtonNumber = 1;
     public static final int resetAutoClimbButton = 7;
-=======
     // switch between auto and manual climb
     public static final int switchtoAutoClimbButton = 6;
     public static final int switchtoManualClimbButton = 7;
->>>>>>> 18dd85eb90130f8816a24760bf5b12182283b204:src/main/java/frc/robot/constants/Constants.java
 }
